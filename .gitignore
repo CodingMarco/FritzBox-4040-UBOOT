@@ -22,3 +22,6 @@ tools/gen_eth_addr
 tools/envcrc
 examples/standalone/hello_world
 examples/standalone/ubi_sysupgrade
+uImage
+.vscode-ctags
+.vscode/
