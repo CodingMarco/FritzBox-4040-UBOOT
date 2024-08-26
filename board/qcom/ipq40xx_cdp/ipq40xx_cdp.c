@@ -609,7 +609,7 @@ int board_eth_init(bd_t *bis)
 	ipq40xx_edma_common_init();
 	gpio = gboard_param->sw_gpio;
 	if (gpio) {
-		printf("Configure GPIOS");
+		printf("Configure eth GPIOs\n");
 		qca_configure_gpio(gpio, gboard_param->sw_gpio_count);
 	}
 	switch (gboard_param->machid) {
