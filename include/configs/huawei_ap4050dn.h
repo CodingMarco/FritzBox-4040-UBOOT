@@ -46,6 +46,25 @@
 #define CONFIG_CMD_LOADB
 #define CONFIG_CMD_SPI
 #define CONFIG_CMD_TFTPSRV
+#define CONFIG_CMD_ASKENV
+#define CONFIG_CMD_BDI		/* bdinfo			*/
+#define CONFIG_CMD_BOOTD	/* bootd			*/
+#define CONFIG_CMD_BSP		/* Board Specific functions	*/
+#define CONFIG_CMD_CONSOLE	/* coninfo			*/
+#define CONFIG_CMD_DHCP		/* DHCP Support			*/
+#define CONFIG_CMD_DIAG		/* Diagnostics			*/
+#define CONFIG_CMD_ECHO		/* echo arguments		*/
+#define CONFIG_CMD_EDITENV	/* editenv			*/
+#define CONFIG_CMD_FLASH	/* flinfo, erase, protect	*/
+#define CONFIG_CMD_IMMAP	/* IMMR dump support		*/
+#define CONFIG_CMD_LOADS	/* loads			*/
+#define CONFIG_CMD_PORTIO	/* Port I/O			*/
+#define CONFIG_CMD_REGINFO	/* Register dump		*/
+#define CONFIG_CMD_SAVES	/* save S record dump		*/
+#define CONFIG_CMD_SDRAM	/* SDRAM DIMM SPD info printout */
+#define CONFIG_CMD_SETEXPR	/* setexpr support		*/
+
+
 
 #undef CONFIG_SYS_LOAD_ADDR
 #define CONFIG_SYS_LOAD_ADDR    0x88000000
