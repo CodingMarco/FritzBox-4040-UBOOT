@@ -33,7 +33,7 @@
 
 #define CONFIG_SERVERIP         192.168.1.10
 #define CONFIG_NETMASK          255.255.255.0
-#define CONFIG_BOOTFILE         CONFIG_MODEL ".bin"
+#define CONFIG_BOOTFILE         "openwrt-ipq40xx-generic-huawei_ap4050dn-initramfs-uImage.itb"
 #define CONFIG_LZO
 #define CONFIG_LZMA
 #define CONFIG_SYS_LONGHELP
@@ -67,10 +67,10 @@
 
 
 #undef CONFIG_SYS_LOAD_ADDR
-#define CONFIG_SYS_LOAD_ADDR    0x84000000
+#define CONFIG_SYS_LOAD_ADDR    0x85000000
 
 #undef CONFIG_SYS_TEXT_BASE
-#define CONFIG_SYS_TEXT_BASE	0x87300000
+#define CONFIG_SYS_TEXT_BASE	0x84000040
 
 #define DEBUG
 
