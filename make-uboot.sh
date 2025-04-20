@@ -32,14 +32,14 @@ arm-openwrt-linux-ld -v || no_toolchain
 
 make clean || die "Can't clean old cruft"
 
-USE_PRIVATE_LIBGCC=yes make -j30 "$BOARDNAME"_ramboot || die "Failed to set build target"
-USE_PRIVATE_LIBGCC=yes make -j30 || die "Failure during u-boot build"
-mv u-boot.bin u-boot_ramboot.bin
+if [[ $BOARDNAME == "huawei_ap4050dn" ]]; then
+	USE_PRIVATE_LIBGCC=yes make -j30 "$BOARDNAME"_ramboot || die "Failed to set build target"
+	USE_PRIVATE_LIBGCC=yes make -j30 || die "Failure during u-boot build"
+	mv u-boot.bin u-boot_ramboot.bin
+fi
 
 USE_PRIVATE_LIBGCC=yes make -j30 $BOARDNAME || die "Failed to set build target"
 USE_PRIVATE_LIBGCC=yes make -j30 || die "Failure during u-boot build"
-
-
 
 [ -e u-boot.bin ] || die "Build succeeded. But u-boot.bin wasn't created"
 
