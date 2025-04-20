@@ -42,6 +42,9 @@ dd if=/dev/zero of="$UIMAGE_RAMBOOT_OUT" bs=1 count=$((0x20))
 cat "$UIMAGE_RAMBOOT_OUT.tmp" >> "$UIMAGE_RAMBOOT_OUT"
 rm -f "$UIMAGE_RAMBOOT_OUT.tmp"
 
+# Pad uImage file to 512kB zeros (otherwise u-boot will halt at something something hashtable)
+dd if=/dev/zero of="$UIMAGE_OUT" bs=1 count=0 seek=512k
+
 # Strip symbols from u-boot ELF
 arm-openwrt-linux-strip -s "$UBOOT_ELF"
 
