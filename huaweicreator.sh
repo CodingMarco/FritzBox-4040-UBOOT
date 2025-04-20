@@ -45,12 +45,4 @@ rm -f "$UIMAGE_RAMBOOT_OUT.tmp"
 # Pad uImage file to 512kB zeros (otherwise u-boot will halt at something something hashtable)
 dd if=/dev/zero of="$UIMAGE_OUT" bs=1 count=0 seek=512k
 
-# Strip symbols from u-boot ELF
-arm-openwrt-linux-strip -s "$UBOOT_ELF"
-
-cp "$UBOOT_ELF" "$UBOOT_ELF_FLASH"
-
-# Pad ELF to partition size of 1MB to make it flashable with flashrom
-dd if=/dev/zero of="$UBOOT_ELF_FLASH" bs=1 count=0 seek=1M
-
 echo "Done."
