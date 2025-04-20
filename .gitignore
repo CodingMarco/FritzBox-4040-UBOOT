@@ -23,6 +23,6 @@ tools/envcrc
 tools/img2srec
 examples/standalone/hello_world
 examples/standalone/ubi_sysupgrade
-uImage
+uImage*
 .vscode-ctags
 .vscode/
