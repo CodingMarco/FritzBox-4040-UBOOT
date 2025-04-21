@@ -1,6 +1,6 @@
 #!/bin/sh
 
-OPENWRT_OR_LEDE_TOOLCHAIN_FOR_ARM7=/mnt/build/lede/ac58u/staging_dir/toolchain-arm_cortex-a7+neon-vfpv4_gcc-8.1.0_musl_eabi/bin/
+OPENWRT_OR_LEDE_TOOLCHAIN_FOR_ARM7=~/git/openwrt/openwrt-ap4050dn/staging_dir/toolchain-arm_cortex-a7+neon-vfpv4_gcc-13.3.0_musl_eabi/bin/
 BOARDNAME=$1
 
 die() {
@@ -32,12 +32,21 @@ arm-openwrt-linux-ld -v || no_toolchain
 
 make clean || die "Can't clean old cruft"
 
-USE_PRIVATE_LIBGCC=yes make $BOARDNAME || die "Failed to set build target"
+if [[ $BOARDNAME == "huawei_ap4050dn" ]]; then
+	USE_PRIVATE_LIBGCC=yes make -j$(nproc) "$BOARDNAME"_ramboot || die "Failed to set build target"
+	USE_PRIVATE_LIBGCC=yes make -j$(nproc) || die "Failure during u-boot build"
+	mv u-boot.bin u-boot_ramboot.bin
+fi
 
-USE_PRIVATE_LIBGCC=yes make || die "Failure during u-boot build"
+USE_PRIVATE_LIBGCC=yes make -j$(nproc) $BOARDNAME || die "Failed to set build target"
+USE_PRIVATE_LIBGCC=yes make -j$(nproc) || die "Failure during u-boot build"
 
 [ -e u-boot.bin ] || die "Build succeeded. But u-boot.bin wasn't created"
 
-fritz/fritzcreator.sh $BOARDNAME || die "Failure during Fritzing"
+if [[ $BOARDNAME == *"huawei"* ]]; then
+    ./huaweicreator.sh $BOARDNAME || die "Failure during Huawei creation"
+else
+    fritz/fritzcreator.sh $BOARDNAME || die "Failure during Fritzing"
+fi
 
 [ -e uboot-${BOARDNAME}.bin ] || die "No idea, but the uboot-${BOARDNAME}.bin wasn't created."

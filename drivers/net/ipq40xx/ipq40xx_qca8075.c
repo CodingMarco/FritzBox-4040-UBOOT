@@ -544,7 +544,7 @@ void psgmii_self_test(void)
 	 */
 	qca8075_phy_reg_write(0, 0x1f, 0x10, 0x6800);
 
-	for (i = 0; i < 100; i++) {
+	for (i = 0; i < 5; i++) {
 		phy_t_status = 0;
 		for (phy = 0; phy < 5; phy++) {
 			value = readl(0xc00066c + (phy * 0xc));
@@ -652,9 +652,8 @@ void psgmii_self_test(void)
 			rx_counter_error = qca8075_phy_mmd_read(0, phy, 7, 0x802c);
 			tx_ok = tx_counter_ok + (tx_counter_ok_high16 << 16);
 			rx_ok = rx_counter_ok + (rx_counter_ok_high16 << 16);
-			debug("rx_ok: %d, tx_ok: %d", rx_ok, tx_ok);
-                        debug("rx_counter_error: %d, tx_counter_error: %d",
-						rx_counter_error, tx_counter_error);
+			debug("rx_ok: %d, tx_ok: %d, rx_counter_error: %d, tx_counter_error: %d\n",
+				rx_ok, tx_ok, rx_counter_error, tx_counter_error);
 			/*
 			 * Success
 			 */
